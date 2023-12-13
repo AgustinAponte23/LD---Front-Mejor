@@ -1,0 +1,7 @@
+<app-editor *ngIf="this.proyectosCuidadanosObs$ | async as proyectosCuidadanos"
+[accionForm]="accionForm"
+[proyectoCuidadano]="proyectosCuidadanos" 
+(guardarCambios)="guardarCambios($event)"
+(volverCallback)="volverCallback($event)">
+
+</app-editor>

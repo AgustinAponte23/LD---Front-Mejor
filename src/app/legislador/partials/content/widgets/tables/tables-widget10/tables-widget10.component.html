@@ -1,0 +1,118 @@
+<!-- begin::Header -->
+
+<div class="card-header border-0 pt-5">
+  <h3 class="card-title align-items-start flex-column">
+    <span class="card-label fw-bolder fs-3 mb-1">Proyectos</span>
+    <span class="text-muted mt-1 fw-bold fs-7">Presentados por vos</span>
+  </h3>
+  <div
+    class="card-toolbar"
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    data-bs-trigger="hover"
+    title="Click to add a user"
+  >
+    <a class="btn btn-sm btn-light-primary" (click)="irCrearProyecto()">
+      <app-keenicon name="plus" class="fs-3"></app-keenicon>
+      Nuevo Proyecto
+    </a>
+  </div>
+</div>
+<!-- end::Header -->
+<!-- begin::Body -->
+<div class="card-body py-3">
+  <!-- begin::Table container -->
+  <div class="table-responsive">
+    <!-- begin::Table -->
+    <table
+      class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" *ngIf="this.proyectosCuidadanoObs$ | async as proyectosCuidadano"
+    >
+      <!-- begin::Table head -->
+      <thead>
+        <tr class="fw-bolder text-muted">
+          <th class="min-w-150px">Titulo</th>
+          <th class="min-w-140px">Tipo de Proyecto</th>
+          <th class="min-w-140px">Postulante</th>
+          <th class="min-w-120px">Estado</th>
+          <th class="min-w-100px text-end">Acciones</th>
+        </tr>
+      </thead>
+      <!-- end::Table head -->
+      <!-- begin::Table body -->
+      <tbody>
+        <tr *ngFor="let proyectos of proyectosCuidadano">
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="d-flex justify-content-start flex-column">
+                <a href="#" class="text-gray-900 fw-bolder text-hover-primary fs-6">
+                  {{proyectos.titulo}}
+                </a>
+              </div>
+            </div>
+          </td>
+          <td>
+            <a
+              href="#"
+              class="text-gray-900 fw-bolder text-hover-primary d-block fs-6"
+            >
+            {{proyectos.idTipoDeProyecto}}
+            </a>
+          </td>
+          <td>
+            
+              <p>{{proyectos.cuidadanos.nombre + ' ' + proyectos.cuidadanos.apellido}}</p>
+            
+          </td>
+          <td class="text-end">
+            <div *ngIf="proyectos.estadosProyectosCuidadano.idEstadosProyectosCuidadano == 1" class="d-flex flex-column w-80">
+              <span class="badge badge-light-primary">Ingreso</span>
+            </div>
+            <div *ngIf="proyectos.estadosProyectosCuidadano.idEstadosProyectosCuidadano == 2" class="d-flex flex-column w-80">
+              <span class="badge badge-light-warning">Revisión</span>
+            </div>
+            <div *ngIf="proyectos.estadosProyectosCuidadano.idEstadosProyectosCuidadano == 3" class="d-flex flex-column w-80">
+              <span class="badge badge-light-success">Aprobado</span>
+            </div>
+            <div *ngIf="proyectos.estadosProyectosCuidadano.idEstadosProyectosCuidadano == 4" class="d-flex flex-column w-80">
+              <span class="badge badge-light-warning">Rechazado</span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex justify-content-end flex-shrink-0">
+              <a
+                (click)="irDetalleProyecto(proyectos.idProyectoCuidadano)"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                "
+              >
+                <app-keenicon name="search-list" class="fs-3"></app-keenicon>
+              </a>
+              <a
+                (click)="irEditarProyecto(proyectos.idProyectoCuidadano)"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                " *ngIf="proyectos.estadosProyectosCuidadano.idEstadosProyectosCuidadano != 3"
+              >
+                <app-keenicon name="pencil" class="fs-3"></app-keenicon>
+              </a>
+              <a
+                (click)="irBorrarProyecto(proyectos.idProyectoCuidadano)"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                " *ngIf="proyectos.estadosProyectosCuidadano.idEstadosProyectosCuidadano != 3"
+              >
+                <app-keenicon name="trash" class="fs-3"></app-keenicon>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <!-- end::Table body -->
+    </table>
+    <!-- end::Table -->
+  </div>
+  <!-- end::Table container -->
+</div>
+<!-- begin::Body -->

@@ -1,0 +1,6 @@
+<app-editor *ngIf="this.proyectosCuidadanos$ | async as proyectosCuidadanos"
+[accionForm]="accionForm"
+[proyectoCuidadano]="proyectosCuidadanos" 
+(volverCallback)="this.volverCallback()">
+</app-editor>
+
