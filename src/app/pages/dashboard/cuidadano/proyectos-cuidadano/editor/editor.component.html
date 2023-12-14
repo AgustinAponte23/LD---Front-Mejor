@@ -194,13 +194,26 @@
             />
           </div>
         </div>
+
+        <!--"Subida de documentación"-->
+        <div class="row mb-12">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="required">Documentación asociada</span></label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="file"
+              class="form-control form-control-lg form-control-solid" formControlName="file"
+            />
+          </div>
+        </div>
+
       </div>
       <div
         [ngSwitch]="accionForm"
         class="card-footer d-flex justify-content-end py-6 px-9"
       >
-        <button
-          *ngSwitchCase="this.accionFormEnum.crear"
+        <button *ngIf="this.accionFormEnum.crear == this.accionForm"
           type="button"
           class="btn btn-primary"
           [disabled]="isLoading"

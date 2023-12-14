@@ -3,26 +3,11 @@
   [style.background-image]="'url(./assets/media/misc/menu-header-bg.jpg)'"
 >
   <h3 class="text-white fw-bold px-9 mt-10 mb-6">
-    Notifications <span class="fs-8 opacity-75 ps-3">24 reports</span>
+    Notificaciones <span class="fs-8 opacity-75 ps-3">1</span>
   </h3>
 
   <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
-    <li class ="nav-item">
-      <a
-        class="
-          nav-link
-          text-white
-          opacity-75 opacity-state-100
-          pb-4
-          cursor-pointer
-        "
-        data-bs-toggle="tab"
-        [ngClass]="activeTabId === 'kt_topbar_notifications_1' ? 'active' : ''"
-        (click)="setActiveTabId('kt_topbar_notifications_1')"
-      >
-        Alerts
-      </a>
-    </li>
+    
 
     <li class="nav-item">
       <a
@@ -37,26 +22,11 @@
         [ngClass]="activeTabId === 'kt_topbar_notifications_2' ? 'active' : ''"
         (click)="setActiveTabId('kt_topbar_notifications_2')"
       >
-        Updates
+        Ayuda
       </a>
     </li>
 
-    <li class="nav-item">
-      <a
-        class="
-          nav-link
-          text-white
-          opacity-75 opacity-state-100
-          pb-4
-          cursor-pointer
-        "
-        data-bs-toggle="tab"
-        [ngClass]="activeTabId === 'kt_topbar_notifications_3' ? 'active' : ''"
-        (click)="setActiveTabId('kt_topbar_notifications_3')"
-      >
-        Logs
-      </a>
-    </li>
+    
   </ul>
 </div>
 
@@ -111,20 +81,17 @@
   >
     <div class="d-flex flex-column px-9">
       <div class="pt-10 pb-0">
-        <h3 class="text-gray-900 text-center fw-bolder">Get Pro Access</h3>
+        <h3 class="text-gray-900 text-center fw-bolder">¿Necesitas ayuda?</h3>
 
         <div class="text-center text-gray-600 fw-bold pt-1">
-          Outlines keep you honest. They stoping you from amazing poorly about
-          drive
+          Si necesitas tanto como para el uso de la plataforma, consultas legales o tecnicas podes contactarte con el equipo de legislador digital
         </div>
 
         <div class="text-center mt-5 mb-9">
-          <a
-            class="btn btn-sm btn-primary px-6 cursor-pointer"
-            data-bs-toggle="modal"
-            data-bs-target="#kt_modal_upgrade_plan"
+          <a href="https://wa.me/+5493435440891" target="_blank"
+            class="btn btn-sm btn-success px-6 cursor-pointer"
           >
-            Upgrade
+            Contactarme
           </a>
         </div>
       </div>

@@ -28,6 +28,11 @@ import { EngageWidget10Component } from 'src/app/legislador/partials/content/wid
           import('../dashboard/analisislegaltecnico/proyectos/proyectos.module').then((m) => m.ProyectosModule),
       },
       {
+        path: 'politicos',
+        loadChildren: () =>
+          import('../dashboard/politicos/proyectos-para-politicos/proyectos-para-politicos.module').then((m) => m.ProyectosParaPoliticosModule),
+      },
+      {
         path: 'inteligencia-artifical-chat',
         loadChildren: () =>
           import('../../modules/apps/chat/chat.module').then((m) => m.ChatModule),
