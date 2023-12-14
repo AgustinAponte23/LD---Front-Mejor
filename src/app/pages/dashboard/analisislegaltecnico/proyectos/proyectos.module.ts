@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ProyectosRoutingModule } from './proyectos-routing.module';
 import { ProyectosComponent } from './proyectos.component';
-import { SharedModule } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
 import { WidgetsModule } from 'src/app/legislador/partials';
 
 
@@ -15,8 +13,6 @@ import { WidgetsModule } from 'src/app/legislador/partials';
   imports: [
     CommonModule,
     ProyectosRoutingModule,
-    SharedModule,
-    ButtonModule,
     WidgetsModule
   ]
 })

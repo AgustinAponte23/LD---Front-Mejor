@@ -27,7 +27,7 @@ export class TablesWidget10Component implements OnInit {
     })*/
 
     // Falta la grilla para el analisis tecnico para que pueda cambiarle el estado al proyecto
-
+    // Integrar Chatgpt como "Legislador IA" para la ayuda de formulación de proyectos de ley
 
   }
 

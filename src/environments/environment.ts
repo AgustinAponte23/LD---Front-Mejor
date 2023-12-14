@@ -168,6 +168,14 @@ export const environmentUrls = {
   },
 };
 
+
+export const environmentUrlChatGpt = {
+  apikey: "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",
+  urls: {
+    api:"https://localhost:7266",
+  },
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

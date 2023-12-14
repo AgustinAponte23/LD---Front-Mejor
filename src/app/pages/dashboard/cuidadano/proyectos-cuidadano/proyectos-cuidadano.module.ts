@@ -5,7 +5,6 @@ import { ProyectosCuidadanoRoutingModule } from './proyectos-cuidadano-routing.m
 import { ProyectosCuidadanoComponent } from './proyectos-cuidadano.component';
 import { TablesWidget11Component } from 'src/app/legislador/partials/content/widgets/tables/tables-widget11/tables-widget11.component';
 import { SharedModule } from 'src/app/legislador/shared/shared.module';
-import { ButtonModule } from 'primeng/button';
 import { WidgetsModule } from 'src/app/legislador/partials';
 import { EditorComponent } from './editor/editor.component';
 import { BorrarComponent } from './borrar/borrar.component';
@@ -32,7 +31,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProyectosCuidadanoRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    ButtonModule,
     WidgetsModule
     
   ]

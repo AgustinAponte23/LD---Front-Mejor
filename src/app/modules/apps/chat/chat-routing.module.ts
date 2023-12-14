@@ -8,7 +8,7 @@ import { PrivateChatComponent } from './private-chat/private-chat.component';
 const routes: Routes = [
   {
     path: '',
-    component: ChatComponent,
+    component: PrivateChatComponent,
     children: [
       {
         path: 'private-chat',

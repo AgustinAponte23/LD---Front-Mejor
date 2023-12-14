@@ -14,12 +14,16 @@ import {
   MessageModel,
   UserInfoModel,
 } from './dataExample';
+import { OpenaiChatgptService } from 'src/app/legislador/shared/services/openai-Chatgpt/openai-chatgpt.service';
+
 
 @Component({
   selector: 'app-chat-inner',
   templateUrl: './chat-inner.component.html',
 })
 export class ChatInnerComponent implements OnInit {
+  respuesta:any;
+  message!:string;
   @Input() isDrawer: boolean = false;
   @HostBinding('class') class = 'card-body';
   @HostBinding('id') id = this.isDrawer
@@ -33,25 +37,18 @@ export class ChatInnerComponent implements OnInit {
   >(defaultMessages);
   messagesObs: Observable<Array<MessageModel>>;
 
-  constructor() {
+  constructor(private chatgptSvc:OpenaiChatgptService) {
     this.messagesObs = this.messages$.asObservable();
   }
 
-  submitMessage(): void {
-    const text = this.messageInput.nativeElement.value;
-    const newMessage: MessageModel = {
-      user: 2,
-      type: 'out',
-      text,
-      time: 'Just now',
-    };
-    this.addMessage(newMessage);
-    // auto answer
-    setTimeout(() => {
-      this.addMessage(messageFromClient);
-    }, 4000);
-    // clear input
-    this.messageInput.nativeElement.value = '';
+
+  
+
+
+
+  submitMessage() {
+   this.chatgptSvc.getDataFromOpenAI(this.message);
+   this.message = '';
   }
 
   addMessage(newMessage: MessageModel): void {
@@ -70,5 +67,7 @@ export class ChatInnerComponent implements OnInit {
     } text-${message.type === 'in' ? 'start' : 'end'}`;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 }

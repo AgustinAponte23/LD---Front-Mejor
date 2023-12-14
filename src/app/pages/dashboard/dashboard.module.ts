@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { ModalsModule, WidgetsModule } from '../../legislador/partials';
-import { ButtonModule } from 'primeng/button';
-import { MessagesModule } from 'primeng/messages';
 import { EngageWidget10Component } from 'src/app/legislador/partials/content/widgets/_new/engage/engage-widget10/engage-widget10.component';
 
 @NgModule({
@@ -29,10 +27,12 @@ import { EngageWidget10Component } from 'src/app/legislador/partials/content/wid
         loadChildren: () =>
           import('../dashboard/analisislegaltecnico/proyectos/proyectos.module').then((m) => m.ProyectosModule),
       },
+      {
+        path: 'inteligencia-artifical-chat',
+        loadChildren: () =>
+          import('../../modules/apps/chat/chat.module').then((m) => m.ChatModule),
+      },
     ]),
-    //ModalsModule,
-    ButtonModule,
-    MessagesModule,
   ],
 })
 export class DashboardModule {}
