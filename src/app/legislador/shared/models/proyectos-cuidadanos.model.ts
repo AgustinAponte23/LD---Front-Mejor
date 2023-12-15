@@ -8,6 +8,7 @@ export class ProyectosCuidadanosVM {
     tiposDeProyectos: TiposDeProyectos[];
     idCuidadano:number;
     cuidadanos: CuidadanosVM;
+    idEstadosProyectosCuidadano:number;
     estadosProyectosCuidadano: EstadosProyectos;
 }
 

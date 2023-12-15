@@ -33,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     WidgetsModule
     
-  ]
+  ],
+  exports:[EditorComponent]
 })
 export class ProyectosCuidadanoModule { }

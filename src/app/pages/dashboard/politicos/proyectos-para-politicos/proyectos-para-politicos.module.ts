@@ -8,11 +8,16 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { SharedModule } from 'src/app/legislador/shared/shared.module';
+import { ProyectosDetalleCuidadanosComponent } from './proyectos-detalle-cuidadanos/proyectos-detalle-cuidadanos.component';
+import { EditorComponent } from '../../cuidadano/proyectos-cuidadano/editor/editor.component';
+import { ProyectosCuidadanoModule } from '../../cuidadano/proyectos-cuidadano/proyectos-cuidadano.module';
 
 
 @NgModule({
   declarations: [
-    ProyectosParaPoliticosComponent
+    ProyectosParaPoliticosComponent,
+    ProyectosDetalleCuidadanosComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -22,7 +27,9 @@ import { SharedModule } from 'src/app/legislador/shared/shared.module';
     InlineSVGModule,
     NgApexchartsModule,
     NgbDropdownModule,
-    SharedModule
+    WidgetsModule,
+    SharedModule,
+    ProyectosCuidadanoModule
 
   ]
 })
