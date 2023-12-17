@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProyectosCuidadanosVM } from 'src/app/legislador/shared/models/proyectos-cuidadanos.model';
 import { ProyectosCuidadanosService } from 'src/app/legislador/shared/services/proyectosCuidadanos/proyectosCuidadanos.service';
+import { UserType, AuthService } from 'src/app/modules/auth';
 
 @Component({
   selector: 'app-tables-widget10',
@@ -13,12 +14,24 @@ export class TablesWidget10Component implements OnInit {
   proyectosCuidadanoObs$:Observable<ProyectosCuidadanosVM[]>;
   proyectosFiltrados: ProyectosCuidadanosVM[];
 
-  constructor(private proyectosService:ProyectosCuidadanosService,private router:Router) {}
+  user$: Observable<UserType>;
+
+
+  constructor(private proyectosService:ProyectosCuidadanosService,private router:Router ,private auth: AuthService) {}
 
   ngOnInit(): void {
-
+    this.user$ = this.auth.currentUserSubject.asObservable();
     // Se buscan todos los proyectos cuidadanos
     this.proyectosCuidadanoObs$ = this.proyectosService.getProyectosCuidadanos();
+
+    this.user$.subscribe((dataUser)=>{
+      if (dataUser?.email == 'analisislegal@ldigital.com') {
+        this.proyectosCuidadanoObs$.subscribe((data)=>{ // Filtro todos los proyectos cuidadanos para que el politico solo pueda ver los aprobados
+          
+          this.proyectosFiltrados = data.filter((x)=>x.idEstadosProyectosCuidadano == 1)
+        })
+      }
+    })
 
     // Se filtran a traves del idUsuario
     /*this.proyectosCuidadanoObs$.subscribe((proyectos)=>{
