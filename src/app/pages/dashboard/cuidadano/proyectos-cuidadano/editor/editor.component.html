@@ -182,18 +182,22 @@
             />
           </div>
         </div>
-        <div class="row mb-6">
-          <label class="col-lg-4 col-form-label fw-bold fs-6"
-            ><span class="required">Tipo de Proyecto</span></label
-          >
+        <div class="row mb-6" *ngIf="tiposDeProyectos$ | async as tiposDeProyectos">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">
+            <span class="required">Tipo de Proyecto</span>
+          </label>
           <div class="col-lg-8 fv-row">
-            <input
-              type="tel"
-              class="form-control form-control-lg form-control-solid"
-              placeholder="Tipo de Proyecto" formControlName="idTipoDeProyecto"
-            />
+            <select class="form-control form-control-lg form-control-solid" formControlName="idTipoDeProyecto">
+              <option value="">
+                Seleccionar
+              </option>
+              <option *ngFor="let proyecto of tiposDeProyectos" value="{{proyecto.idTipoDeProyecto}}" >
+                {{ proyecto.descripcion }}
+              </option>
+            </select>
           </div>
         </div>
+        
 
         <!--"Subida de documentación"-->
         <div class="row mb-12">
@@ -213,7 +217,7 @@
         [ngSwitch]="accionForm"
         class="card-footer d-flex justify-content-end py-6 px-9"
       >
-        <button *ngIf="this.accionFormEnum.crear == this.accionForm"
+        <button *ngSwitchCase="this.accionFormEnum.crear"
           type="button"
           class="btn btn-primary"
           [disabled]="isLoading"
@@ -267,34 +271,36 @@
         </button>
 
 
-        <div *ngIf="this.proyectoCuidadano.estadosProyectosCuidadano.idEstadosProyectosCuidadano == 3">
-          <button 
-          *ngSwitchCase="this.accionFormEnum.detalle"
-          type="button"
-          class="btn btn-primary"
-          [disabled]="isLoading"
-          (click)="borrar()"
-        >
-          <ng-container *ngIf="!isLoading">Votar Proyecto</ng-container>
-          <ng-container *ngIf="isLoading">
-            <span clas="indicator-progress" [style.display]="'block'">
-              Espere{{ " " }}
-              <span
-                class="spinner-border spinner-border-sm align-middle ms-2"
-              ></span>
-            </span>
-          </ng-container>
-        </button>
-        </div>
-
-
-        <div *ngIf="this.proyectoCuidadano.estadosProyectosCuidadano.idEstadosProyectosCuidadano != 3 && this.accionFormEnum.detalle == this.accionForm">
-
-        <div class="my-5 notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
-          <app-keenicon name="shield-tick" class="fs-2 text-primary me-4" _nghost-ng-c1433053698="" style="display: contents;">
-            <span _ngcontent-ng-c1433053698="" class="fs-2 ki-duotone ki-shield-tick me-4 text-primary">
-              <span _ngcontent-ng-c1433053698="" class="path1"></span><span _ngcontent-ng-c1433053698="" class="path2"></span><!----></span><!----><!----></app-keenicon><div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap"><div class="mb-3 mb-md-0 fw-bold"><h4 class="text-gray-800 fw-bolder">Importante</h4><div class="fs-6 text-gray-600 pe-7"> Este proyecto no se puede votar debido a que se encuentra en un estado diferente a "Aprobado". </div></div></div></div>
-
+        <div *ngIf="this.accionForm != 'crear'">
+          <div *ngIf="this.proyectoCuidadano.estadosProyectosCuidadano.idEstadosProyectosCuidadano == 3">
+            <button 
+            *ngSwitchCase="this.accionFormEnum.detalle"
+            type="button"
+            class="btn btn-primary"
+            [disabled]="isLoading"
+            (click)="borrar()"
+          >
+            <ng-container *ngIf="!isLoading">Votar Proyecto</ng-container>
+            <ng-container *ngIf="isLoading">
+              <span clas="indicator-progress" [style.display]="'block'">
+                Espere{{ " " }}
+                <span
+                  class="spinner-border spinner-border-sm align-middle ms-2"
+                ></span>
+              </span>
+            </ng-container>
+          </button>
+          </div>
+  
+  
+          <div *ngIf="this.proyectoCuidadano.estadosProyectosCuidadano.idEstadosProyectosCuidadano != 3 && this.accionFormEnum.detalle == this.accionForm">
+  
+          <div class="my-5 notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+            <app-keenicon name="shield-tick" class="fs-2 text-primary me-4" _nghost-ng-c1433053698="" style="display: contents;">
+              <span _ngcontent-ng-c1433053698="" class="fs-2 ki-duotone ki-shield-tick me-4 text-primary">
+                <span _ngcontent-ng-c1433053698="" class="path1"></span><span _ngcontent-ng-c1433053698="" class="path2"></span><!----></span><!----><!----></app-keenicon><div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap"><div class="mb-3 mb-md-0 fw-bold"><h4 class="text-gray-800 fw-bolder">Importante</h4><div class="fs-6 text-gray-600 pe-7"> Este proyecto no se puede votar debido a que se encuentra en un estado diferente a "Aprobado". </div></div></div></div>
+  
+          </div>
         </div>
 
        

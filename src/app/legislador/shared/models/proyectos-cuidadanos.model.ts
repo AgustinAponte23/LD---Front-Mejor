@@ -5,7 +5,7 @@ export class ProyectosCuidadanosVM {
     fundamentos: string;
     votos: number;
     idTipoDeProyecto: number;
-    tiposDeProyectos: TiposDeProyectos[];
+    tiposDeProyectos: TiposDeProyectos;
     idCuidadano:number;
     cuidadanos: CuidadanosVM;
     idEstadosProyectosCuidadano:number;
@@ -13,7 +13,7 @@ export class ProyectosCuidadanosVM {
 }
 
 export interface TiposDeProyectos{
-    idTipoDeEvento: number;
+    idTipoDeProyecto: number;
     descripcion: string;
 }
 

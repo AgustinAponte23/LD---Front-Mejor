@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { enumAccionForm } from 'src/app/legislador/shared/enum/enum';
 import { ProyectosCuidadanosVM, TiposDeProyectos } from 'src/app/legislador/shared/models/proyectos-cuidadanos.model';
+import { GoogleDriveService } from 'src/app/legislador/shared/services/google-drive/google-drive.service';
 import { ProyectosCuidadanosService } from 'src/app/legislador/shared/services/proyectosCuidadanos/proyectosCuidadanos.service';
 import ValidatorsKap from 'src/app/legislador/shared/validators/validatorsKap';
 
@@ -42,7 +43,7 @@ export class EditorComponent {
 
   public validatorsKap = ValidatorsKap;
 
-  constructor(private fb: FormBuilder, private proyectosCuidadanosService: ProyectosCuidadanosService,private cdr: ChangeDetectorRef){
+  constructor(private googleDriveService:GoogleDriveService,private fb: FormBuilder, private proyectosCuidadanosService: ProyectosCuidadanosService,private cdr: ChangeDetectorRef){
     const loadingSubscr = this.isLoading$
       .asObservable()
       .subscribe((res) => (this.isLoading = res));
@@ -57,7 +58,8 @@ export class EditorComponent {
       descripcion: ['', Validators.required],
       fundamentos: ['', Validators.required],
       votos: [0],
-      idTipoDeProyecto: [1, Validators.required],
+      file:[null],
+      idTipoDeProyecto: ['', Validators.required],
       idEstadosProyectosCuidadano: [1, Validators.required],
       idCuidadano: [1],
     });
@@ -83,9 +85,9 @@ export class EditorComponent {
   
       if (
   
-        this.accionForm === enumAccionForm.detalle ||
+        this.accionFormEnum.detalle == this.accionForm ||
   
-        this.accionForm === enumAccionForm.borrar
+        this.accionFormEnum.borrar == this.accionForm
   
       )
   
@@ -138,6 +140,10 @@ onSubmit() {
 
   this.formularioProyectoCuidadano.markAllAsTouched();
   if (this.formularioProyectoCuidadano.valid) {
+    //Antes de guardar los datos en base pregunto si hay cargados archivos correctamente
+    /*if (this.formularioProyectoCuidadano.value.file != null) {
+      this.googleDriveService.uploadFile(this.formularioProyectoCuidadano.value.file);
+    } */
     this.guardarCambios.emit(this.formularioProyectoCuidadano.value);
 
 
