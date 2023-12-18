@@ -3,13 +3,14 @@ export class ProyectosCuidadanosVM {
     titulo: string;
     descripcion: string;
     fundamentos: string;
-    votos: number;
     idTipoDeProyecto: number;
     tiposDeProyectos: TiposDeProyectos;
     idCuidadano:number;
     cuidadanos: CuidadanosVM;
     idEstadosProyectosCuidadano:number;
     estadosProyectosCuidadano: EstadosProyectos;
+    idVotosProyectos:number;
+    votosProyectos: VotosProyectos;
 }
 
 export interface TiposDeProyectos{
@@ -21,6 +22,15 @@ export interface EstadosProyectos{
     idEstadosProyectosCuidadano: number;
     descripcion: string;
 }
+
+export interface VotosProyectos{
+    idVotosProyectos: number;
+    descripcion: string;
+    votosPositivos:number;
+    votosNegativos:number;
+    votosTotales:number;
+}
+
 
 export interface CuidadanosVM{
     idCuidadano: number;

@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { enumAccionForm } from 'src/app/legislador/shared/enum/enum';
-import { ProyectosCuidadanosVM, TiposDeProyectos } from 'src/app/legislador/shared/models/proyectos-cuidadanos.model';
+import { EstadosProyectos, ProyectosCuidadanosVM, TiposDeProyectos } from 'src/app/legislador/shared/models/proyectos-cuidadanos.model';
 import { GoogleDriveService } from 'src/app/legislador/shared/services/google-drive/google-drive.service';
 import { ProyectosCuidadanosService } from 'src/app/legislador/shared/services/proyectosCuidadanos/proyectosCuidadanos.service';
 import ValidatorsKap from 'src/app/legislador/shared/validators/validatorsKap';
+import { UserType, AuthService } from 'src/app/modules/auth';
 
 @Component({
   selector: 'app-editor',
@@ -32,6 +33,8 @@ export class EditorComponent {
   proyectosCuidadanosObs$:Observable<ProyectosCuidadanosVM[]>;
 
   tiposDeProyectos$:Observable<TiposDeProyectos[]>;
+  estadosProyectos$:Observable<EstadosProyectos[]>;
+  user$: Observable<UserType>;
 
   @Output()
   volverCallback: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -43,7 +46,7 @@ export class EditorComponent {
 
   public validatorsKap = ValidatorsKap;
 
-  constructor(private googleDriveService:GoogleDriveService,private fb: FormBuilder, private proyectosCuidadanosService: ProyectosCuidadanosService,private cdr: ChangeDetectorRef){
+  constructor(private googleDriveService:GoogleDriveService,private fb: FormBuilder,private auth: AuthService, private proyectosCuidadanosService: ProyectosCuidadanosService,private cdr: ChangeDetectorRef){
     const loadingSubscr = this.isLoading$
       .asObservable()
       .subscribe((res) => (this.isLoading = res));
@@ -51,13 +54,14 @@ export class EditorComponent {
   }
 
   ngOnInit(){
+    this.user$ = this.auth.currentUserSubject.asObservable();
 
     this.formularioProyectoCuidadano = this.fb.group({
       idProyectoCuidadano: [0],
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
       fundamentos: ['', Validators.required],
-      votos: [0],
+      idVotosProyectos: [null],
       file:[null],
       idTipoDeProyecto: ['', Validators.required],
       idEstadosProyectosCuidadano: [1, Validators.required],
@@ -68,6 +72,7 @@ export class EditorComponent {
 
     // Peticiones get 
     this.tiposDeProyectos$ = this.proyectosCuidadanosService.getTiposDeProyectos();
+    this.estadosProyectos$ = this.proyectosCuidadanosService.getEstadosProyectos();
 
     if (!this.proyectoCuidadano) {
 

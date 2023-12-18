@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environmentUrls } from '../../../../../environments/environment';
-import { ProyectosCuidadanosVM, TiposDeProyectos } from '../../models/proyectos-cuidadanos.model';
+import { EstadosProyectos, ProyectosCuidadanosVM, TiposDeProyectos } from '../../models/proyectos-cuidadanos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,7 @@ export class ProyectosCuidadanosService {
   private urlProyectosCuidadanosPut: string = `${environmentUrls.urls.api}/proyectos/editarProyectoCuidadano/`;
   private urlBorrarProyectosCuidadanos: string = `${environmentUrls.urls.api}/proyectos/eliminarProyectoCuidadano/`;
   private urlObtenerTiposDeProyectos: string = `${environmentUrls.urls.api}/proyectos/TiposDeProyectos`;
+  private urlObtenerEstadosProyectos: string = `${environmentUrls.urls.api}/proyectos/EstadosDeProyectos`;
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +34,11 @@ export class ProyectosCuidadanosService {
   getTiposDeProyectos(): Observable <TiposDeProyectos[]> {
     const url = this.urlObtenerTiposDeProyectos;
     return this.http.get<TiposDeProyectos[]>(url);
+  }
+
+  getEstadosProyectos(): Observable <EstadosProyectos[]> {
+    const url = this.urlObtenerEstadosProyectos;
+    return this.http.get<EstadosProyectos[]>(url);
   }
 
   putProyectosCuidadanos(idProyectosCuidadanos:number, model:ProyectosCuidadanosVM){

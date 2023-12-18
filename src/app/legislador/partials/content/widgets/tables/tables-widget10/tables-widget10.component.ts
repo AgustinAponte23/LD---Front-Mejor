@@ -28,7 +28,7 @@ export class TablesWidget10Component implements OnInit {
       if (dataUser?.email == 'analisislegal@ldigital.com') {
         this.proyectosCuidadanoObs$.subscribe((data)=>{ // Filtro todos los proyectos cuidadanos para que el politico solo pueda ver los aprobados
           
-          this.proyectosFiltrados = data.filter((x)=>x.idEstadosProyectosCuidadano == 1)
+          this.proyectosFiltrados = data.filter((x)=>x.idEstadosProyectosCuidadano == 1 || x.idEstadosProyectosCuidadano == 2)
         })
       }
     })
